@@ -28,6 +28,7 @@ php script.php input.csv
 
 ```bash
 composer install
+```
 
 ```bash
 php bin/run_example.php test_operations.txt
