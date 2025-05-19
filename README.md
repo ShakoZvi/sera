@@ -26,21 +26,6 @@ php script.php input.csv
 1. Clone the repository
 2. Run:
 
-```bash
-composer install
-```
-
-```bash
-php bin/run_example.php test_operations.txt
-php bin/script.php input.csv
-```
-
-### 🧪 Testing
-
-```bash
-./bin/phpunit tests/
-```
-
 ### ⚙️ Setup
 
 ```bash
@@ -52,6 +37,17 @@ Include a `.env` file with:
 
 ```
 CURRENCY_API_KEY=your_api_key
+```
+
+```bash
+php bin/run_example.php test_operations.txt
+php bin/script.php input.csv
+```
+
+### 🧪 Testing
+
+```bash
+./bin/phpunit tests/
 ```
 
 ### 📐 Architecture
