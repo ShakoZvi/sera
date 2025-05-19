@@ -38,4 +38,31 @@ class OperationProcessor
             default => throw new \RuntimeException("Unsupported operation type: {$operation->getType()} / {$operation->getUserType()}"),
         };
     }
+
+    // public function calculate(array $operation): string
+    // {
+    //     $type = $operation['type'];
+    //     $userType = $operation['user_type'];
+    //     $amount = $operation['operation']['amount'];
+    //     $currency = $operation['operation']['currency'];
+
+    //     // გადაიყვანე EUR-ში
+    //     $amountInEur = $this->exchangeService->convertToEur($amount, $currency);
+
+    //     $fee = 0.0;
+
+    //     if ($type === 'deposit') {
+    //         $fee = $amountInEur * 0.0003; // 0.03%
+    //     } elseif ($type === 'withdraw') {
+    //         if ($userType === 'business') {
+    //             $fee = $amountInEur * 0.005; // 0.5%
+    //         } elseif ($userType === 'private') {
+    //             // ვთქვათ ჯამურად დათვლა არ გვჭირდება ჯერ, მხოლოდ 0.3% fee
+    //             $fee = $amountInEur * 0.003; // 0.3%
+    //         }
+    //     }
+
+    //     return number_format(ceil($fee * 100) / 100, 2, '.', '');
+    // }
+
 }

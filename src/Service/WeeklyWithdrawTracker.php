@@ -53,4 +53,5 @@ class WeeklyWithdrawTracker
             'total' => $totalAmount,
         ];
     }
+    
 }

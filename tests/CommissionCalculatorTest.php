@@ -1,45 +1,69 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Tests;
 
 use PHPUnit\Framework\TestCase;
-use App\Model\Operation;
 use App\OperationProcessor;
-use App\Service\Commission\DepositCommission;
-use App\Service\Commission\PrivateWithdrawCommission;
-use App\Service\Commission\BusinessWithdrawCommission;
+use App\Service\ExchangeService;
 
 class CommissionCalculatorTest extends TestCase
 {
-    public function testDepositCommission()
+    private OperationProcessor $processor;
+
+    protected function setUp(): void
     {
-        $operation = new Operation('2022-01-01', 'user1', 'private', 'deposit', 1000.00, 'EUR');
-        $processor = new OperationProcessor();
-
-        $commission = $processor->process($operation);
-
-        $this->assertEquals('0.30', $commission);
+        $exchangeService = new ExchangeService(); // ეს შენს ლოგიკას შეესაბამება
+        $this->processor = new OperationProcessor($exchangeService, 'EUR');
     }
 
-    public function testPrivateWithdrawCommission()
+    public function testDepositCommission(): void
     {
-        $operation = new Operation('2022-01-01', 'user1', 'private', 'withdraw', 1000.00, 'EUR');
-        $processor = new OperationProcessor();
+        $operation = [
+            'date' => '2025-01-01',
+            'user_id' => 1,
+            'user_type' => 'private',
+            'type' => 'deposit',
+            'operation' => [
+                'amount' => 200.00,
+                'currency' => 'EUR'
+            ]
+        ];
 
-        $commission = $processor->process($operation);
-
-        $this->assertEquals('3.00', $commission);
+        $result = $this->processor->calculate($operation);
+        $this->assertEquals('0.06', $result); // assuming 0.03% deposit fee
     }
 
-    public function testBusinessWithdrawCommission()
+    public function testPrivateWithdrawCommission(): void
     {
-        $operation = new Operation('2022-01-01', 'user2', 'business', 'withdraw', 1000.00, 'EUR');
-        $processor = new OperationProcessor();
+        $operation = [
+            'date' => '2025-01-02',
+            'user_id' => 1,
+            'user_type' => 'private',
+            'type' => 'withdraw',
+            'operation' => [
+                'amount' => 1200.00,
+                'currency' => 'EUR'
+            ]
+        ];
 
-        $commission = $processor->process($operation);
+        $result = $this->processor->calculate($operation);
+        $this->assertEquals('0.60', $result); // assuming free limit exceeded
+    }
 
-        $this->assertEquals('5.00', $commission);
+    public function testBusinessWithdrawCommission(): void
+    {
+        $operation = [
+            'date' => '2025-01-03',
+            'user_id' => 2,
+            'user_type' => 'business',
+            'type' => 'withdraw',
+            'operation' => [
+                'amount' => 1000.00,
+                'currency' => 'EUR'
+            ]
+        ];
+
+        $result = $this->processor->calculate($operation);
+        $this->assertEquals('5.00', $result); // assuming 0.5% fee
     }
 }

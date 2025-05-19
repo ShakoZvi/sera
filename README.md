@@ -37,7 +37,7 @@ php bin/script.php input.csv
 ### 🧪 Testing
 
 ```bash
-./vendor/bin/phpunit tests/
+./bin/phpunit tests/
 ```
 
 ### ⚙️ Setup
