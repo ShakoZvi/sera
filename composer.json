@@ -1,17 +1,17 @@
 {
-    "name": "paysera/commission-task-skeleton",
-    "description": "Skeleton for Paysera recruitment task",
+    "name": "shakoz/commission-task-skeleton",
+    "description": "Skeleton for Sera recruitment task",
     "keywords": [],
     "type": "project",
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "Paysera\\CommissionTask\\": "app/"
+            "Sera\\CommissionTask\\": "app/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Paysera\\CommissionTask\\Tests\\": "test/",
+            "Sera\\CommissionTask\\Tests\\": "test/",
             "App\\Tests\\": "tests/"
         }
     },
