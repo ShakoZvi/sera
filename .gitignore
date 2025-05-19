@@ -1,0 +1,28 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.iml
+
+# Environment
+.env
+!.env.example
+
+# Cache & logs
+/cache/
+/storage/
+*.log
+*.tmp
+*.bak
+
+# Composer vendor folder — install via `composer install`
+/vendor/
+
+# PHPUnit
+.phpunit.result.cache
+
+# Coverage reports
+/coverage/
